@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: test-set
+spec:
+        replicas: 3
+        selector:
+                matchExpressions:
+                        - key: app
+                          operator: In
+                          values:
+                                - test
+        template:
+                metadata:
+                        name: test
+                        labels:
+                                app: test
+                spec:
+                        containers:
+                                - image: olegsir/test-nginx
+                                  name: test-nginx
+                                  ports:
+                                         - containerPort: 80
+                                           protocol: TCP
